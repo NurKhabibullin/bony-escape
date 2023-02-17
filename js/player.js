@@ -7,7 +7,7 @@ export class Player {
         this.height = 91.3;
         this.x = this.game.marginX;;
         this.y = this.game.height - this.height - this.game.marginY;
-        this.image = document.getElementById('player');
+        this.img = document.getElementById('player');
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame;
@@ -68,7 +68,7 @@ export class Player {
     }
 
     draw(context) {
-        context.drawImage(this.image, 
+        context.drawImage(this.img, 
             this.frameX * this.width, this.frameY * this.height, this.width, this.height, 
             this.x, this.y, this.width, this.height);
     }
