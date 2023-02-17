@@ -4,7 +4,8 @@
 ## ru
 Bony Escape - игра, созданная при помощи JavaScript и HTML Canvas. Цель игры проста - за определённое время заработать как можно больше костей, отпугивая врагов, которые движутся к дому, охраняемого собакой.
 
-Управление:
+### Управление:
+
 Ф | Стрелка влево - движение влево
 
 В | Стрелка вправо - движение вправо
@@ -14,7 +15,7 @@ Bony Escape - игра, созданная при помощи JavaScript и HTM
 ## en
 Bony Escape is a game developed using JavaScript and HTML Canvas. The goal of the game is pretty simple - for a certain time player has to earn as many bones as possible, scaring off enemies who are moving to the house guarded by a dog.
 
-The management:
+### The management:
 
 A | Arrow Left - left move
 
