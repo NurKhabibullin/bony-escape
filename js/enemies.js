@@ -9,10 +9,16 @@ class Enemy {
 
         if (this.x + this.width < 0) {
             this.isDeleted = true;
+            this.game.damage--;
+            this.game.bones -= Math.floor(Math.random() * 3);
         }
     }
     
     draw(context) {
+        if (this.game.debug) {
+            context.strokeRect(this.x, this.y, this.width, this.height);
+        }
+
         context.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 }
@@ -25,7 +31,8 @@ export class GroundEnemy extends Enemy {
         this.height = 100;
         this.x = this.game.width;
         this.y = this.game.height - this.height - this.game.marginY;
-        this.img = document.getElementById('enemy-ground');
+        this.imgs = document.querySelectorAll('#enemy-ground');
+        this.img = this.imgs[Math.round(Math.random())];
         this.speedX = Math.random() + 1;
         this.speedY = 0;
     }

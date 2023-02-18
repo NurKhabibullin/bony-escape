@@ -1,4 +1,5 @@
-import { Sitting, Running, Jumping, Falling } from '../js/states.js';
+import { Sitting, Running, Jumping, Falling, Diving } from '../js/states.js';
+import { FloatingText } from '../js/floatingText.js';
 
 export class Player {
     constructor(game) {
@@ -18,12 +19,14 @@ export class Player {
         this.vy = 0;
         this.weight = 1;
         this.maxSpeed = 10;
-        this.states = [new Sitting(this), new Running(this), new Jumping(this), new Falling(this)];
-        this.currentState = this.states[0];
-        this.currentState.enter();
+        this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), 
+            new Diving(this.game)];
+        this.currentState = null;
     }
 
     update(input, deltaTime) {
+        this.isCollision();
+
         this.currentState.handleInput(input);
 
         this.x += this.speed;
@@ -42,8 +45,8 @@ export class Player {
             this.x = this.game.marginX;
         }
 
-        if (this.x > this.game.width - this.width - this.game.marginX) {
-            this.x = this.game.width - this.width - this.game.marginX;
+        if (this.x > this.game.width - this.width) {
+            this.x = this.game.width - this.width;
         }
 
         this.y += this.vy;
@@ -52,6 +55,10 @@ export class Player {
             this.vy += this.weight;
         } else {
             this.vy = 0;
+        }
+
+        if (this.y > this.game.height - this.height - this.game.marginY) {
+            this.y = this.game.height - this.height - this.game.marginY;
         }
 
         if (this.frameTimer > this.frameInterval) {
@@ -68,6 +75,10 @@ export class Player {
     }
 
     draw(context) {
+        if (this.game.debug) {
+            context.strokeRect(this.x, this.y, this.width, this.height);
+        }
+
         context.drawImage(this.img, 
             this.frameX * this.width, this.frameY * this.height, this.width, this.height, 
             this.x, this.y, this.width, this.height);
@@ -80,5 +91,19 @@ export class Player {
     setState(state) {
         this.currentState = this.states[state];
         this.currentState.enter();
+    }
+
+    isCollision() {
+        this.game.enemies.forEach(enemy => {
+            if (enemy.x < this.x + this.width && enemy.x > this.x - enemy.width 
+                && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height) {
+                enemy.isDeleted = true;
+
+                this.currentValue = Math.ceil(Math.random() * 2);
+
+                this.game.bones += this.currentValue;
+                this.game.floatingTexts.push(new FloatingText(`+${this.currentValue}`, enemy.x ,enemy.y, 150, 50));
+            }
+        });
     }
 }
