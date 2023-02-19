@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 html, body {
   font-family: "Yanone Kaffeesatz", sans-serif;
   width: 100%;
@@ -29,26 +34,62 @@ html, body {
 }
 
 #canvas {
-  position: absolute;
   max-width: 100%;
   max-height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 50px;
+  margin-left: 50%;
+  transform: translateX(-50%);
   border: 3px solid #000;
 }
 
-#player, #enemy-fly, #enemy-ground, #bones, #damage {
+#player, #enemy-fly, #enemy-ground, #timer, #bones, #damage {
   display: none;
 }
 
-p {
-  margin: 50px auto;
+.main {
+  position: relative;
+  width: 100%;
+  margin: 25px 0;
+}
+.main__title {
+  margin-top: 25px;
+  font-size: 35px;
   text-align: center;
-  font-size: 30px;
+}
+.main__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
 }
 
-#play-button {
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
+#mode-choose {
+  display: block;
+  margin: 25px auto;
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
+  border: 3px solid #000;
+  border-radius: 10px;
+}
+#mode-easy {
+  color: rgb(22, 101, 0);
+}
+#mode-difficult {
+  color: rgb(26, 120, 0);
+}
+#mode-impossible {
+  color: rgb(76, 191, 0);
+}
+
+.buttons-item {
+  font-size: 30px;
+  padding: 5px;
+  border: 3px solid #000;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+}
+.buttons-item:hover {
+  color: #fff;
+  background-color: #000;
 }

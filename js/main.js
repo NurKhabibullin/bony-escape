@@ -3,9 +3,26 @@ import { Player } from '../js/player.js';
 import { GroundEnemy, FlyingEnemy } from '../js/enemies.js';
 import { UI } from '../js/UI.js'
 
-window.onload = function() {
 
-    let hardMode = false, gameSpeed = 1;
+
+window.onload = function() {
+    let pause = false, resume = false;
+    
+    document.getElementById('pause').addEventListener('click', () => {
+        pause = true;
+        resume = false;
+    });
+    
+    document.getElementById('resume').addEventListener('click', () => {
+        resume = true;
+        pause = false;
+    });
+
+    document.getElementById('reload').addEventListener('click', () => {
+        location.reload();
+    });
+
+    let gameMode = +document.getElementById('mode-choose').value;
 
     const canvas = document.getElementById('canvas'), ctx = canvas.getContext('2d');
 
@@ -16,11 +33,12 @@ window.onload = function() {
             this.width = width;
             this.height = height;
 
-            this.hardMode = hardMode;
+            this.mode = gameMode;
+            this.pause = pause;
             this.debug = false;
-            this.speed = gameSpeed;
+            this.speed = 1;
             this.time = 0;
-            this.maxTime = 120000;
+            this.maxTime = 90000;
             this.gameOver = false;
             this.bones = 0;
             this.damage = 3;
@@ -40,32 +58,42 @@ window.onload = function() {
         }
         
         update(deltaTime) {
-            this.time += deltaTime;
-
-            if (this.time > this.maxTime || this.damage === 0) {
-                this.gameOver = true;
+            if (pause && this.mode < 2) {
+                this.speed = 0;
             }
 
-            this.player.update(this.input.keys, deltaTime);
-
-            if (this.enemyTimer > this.enemyInterval) {
-                this.spawnEnemy();
-                this.enemyTimer = 0;
-            } else {
-                this.enemyTimer += deltaTime;
+            if (resume) {
+                this.speed = 1;
             }
 
-            this.enemies.forEach(enemy => {
-                enemy.update(deltaTime);
-            });
+            if (this.speed > 0) {
+                this.time += deltaTime;
 
-            this.floatingTexts.forEach(text => {
-                text.update();
-            });
-
-            this.enemies = this.enemies.filter(enemy => !enemy.isDeleted);
-
-            this.floatingTexts = this.floatingTexts.filter(text => !text.isDeleted);
+                if (this.time > this.maxTime || this.damage === 0) {
+                    this.gameOver = true;
+                }
+    
+                this.player.update(this.input.keys, deltaTime);
+    
+                if (this.enemyTimer > this.enemyInterval) {
+                    this.spawnEnemy();
+                    this.enemyTimer = 0;
+                } else {
+                    this.enemyTimer += deltaTime;
+                }
+    
+                this.enemies.forEach(enemy => {
+                    enemy.update(deltaTime);
+                });
+    
+                this.floatingTexts.forEach(text => {
+                    text.update();
+                });
+    
+                this.enemies = this.enemies.filter(enemy => !enemy.isDeleted);
+    
+                this.floatingTexts = this.floatingTexts.filter(text => !text.isDeleted);
+            }
         }
 
         draw(context) {
@@ -88,7 +116,6 @@ window.onload = function() {
             }
 
             this.enemies.push(new FlyingEnemy(this));
-            console.log(this.enemies);
         }
     }
     

@@ -1,5 +1,5 @@
 import { Sitting, Running, Jumping, Falling, Diving } from '../js/states.js';
-import { FloatingText } from '../js/floatingText.js';
+// import { FloatingText } from '../js/floatingText.js';
 
 export class Player {
     constructor(game) {
@@ -22,10 +22,14 @@ export class Player {
         this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), 
             new Diving(this.game)];
         this.currentState = null;
+        this.attackInterval = 200;
+        this.lastAttackTimer = 0;
     }
 
     update(input, deltaTime) {
         this.isCollision();
+
+        this.lastAttackTimer += deltaTime;
 
         this.currentState.handleInput(input);
 
@@ -96,13 +100,12 @@ export class Player {
     isCollision() {
         this.game.enemies.forEach(enemy => {
             if (enemy.x < this.x + this.width && enemy.x > this.x - enemy.width 
-                && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height) {
-                enemy.isDeleted = true;
-
-                this.currentValue = Math.ceil(Math.random() * 2);
-
-                this.game.bones += this.currentValue;
-                this.game.floatingTexts.push(new FloatingText(`+${this.currentValue}`, enemy.x ,enemy.y, 150, 50));
+                && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height 
+                && this.attackInterval < this.lastAttackTimer) {
+                enemy.hp--;
+                enemy.x += 30;
+                enemy.speedX--;
+                this.lastAttackTimer = 0;
             }
         });
     }

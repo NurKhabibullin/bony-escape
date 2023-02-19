@@ -2,6 +2,7 @@ export class UI {
     constructor(game) {
         this.game = game;
         this.font = '30px Yanone Kaffeesatz';
+        this.timerImg = document.getElementById('timer');
         this.bonesImg = document.getElementById('bones');
         this.damageImg = document.getElementById('damage');
     }
@@ -12,11 +13,13 @@ export class UI {
         context.textAlign = 'left';
 
         context.font = `27px Yanone Kaffeesatz`;
-        context.fillText('Time left: ' + ((this.game.maxTime * 0.001).toFixed(1) 
-                        - (this.game.time * 0.001).toFixed(1)) + 's', 20, 40);
 
         context.font = this.font;
         context.fillStyle = '#000';
+        context.drawImage(this.timerImg, 25, 15, 40, 40);
+        context.fillText((this.game.maxTime * 0.001).toFixed(1) - (this.game.time * 0.001).toFixed(1) + 's', 80, 40);
+
+        
 
         // context.fillText('Bones: ' + this.game.bones, 20, 80);
         context.drawImage(this.bonesImg, 20, 60, 50, 25);
@@ -29,7 +32,7 @@ export class UI {
         if (this.game.gameOver) {
             context.textAlign = 'center';
 
-            if (this.game.bones < 100) {
+            if (this.game.bones < 100 || this.game.time < this.game.maxTime) {
                 context.fillStyle = '#500';
                 context.font = `50px Yanone Kaffeesatz`;
                 context.fillText('Game over!', this.game.width * 0.5, this.game.height * 0.5 - 20);

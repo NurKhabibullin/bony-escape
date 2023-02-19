@@ -1,13 +1,25 @@
+import { FloatingText } from '../js/floatingText.js';
+
 class Enemy {
     constructor() {
         this.isDeleted = false;
+        this.hp = 2;
     }
 
     update(deltaTime) {
         this.x -= this.speedX + this.game.speed;
         this.y += this.speedY;
 
-        if (this.x + this.width < 0) {
+        if (this.hp <= 0) {
+            this.isDeleted = true;
+
+            this.game.player.currentValue = Math.ceil(Math.random() * 3);
+            this.game.bones += this.game.player.currentValue;
+            
+            this.game.floatingTexts.push(new FloatingText(`+${this.game.player.currentValue}`, this.x, this.y, 150, 50));
+        }
+
+        if (this.x + this.width < this.game.marginX) {
             this.isDeleted = true;
             this.game.damage--;
             this.game.bones -= Math.floor(Math.random() * 3);
@@ -48,7 +60,7 @@ export class FlyingEnemy extends Enemy {
         this.y = Math.random() * this.game.height * 0.5;
         this.img = document.getElementById('enemy-fly');
         this.angle = 0;
-        this.va = Math.random() * 0.1 + 0.1
+        this.va = Math.random() * 0.1 + 0.1;
         this.speedX = Math.random() + 1;
         this.speedY = 0;
     }
