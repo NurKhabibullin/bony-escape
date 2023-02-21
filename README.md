@@ -24,6 +24,8 @@
 
 `Й` - дебаг (границы спрайтов)
 
+> P.S. Игра ещё не работает на мобильных устройствах.
+
 ## en
 ### Bony Escape is a game developed using **_JavaScript_ and _HTML Canvas_**. 
 
@@ -46,6 +48,8 @@ After the passage of game time, a message about a successful escape or an annoyi
 `Escape` (`Esc`) - pause
 
 `Q` - debug (hitboxes on)
+
+> P.S. Game is not working on mobile devices yet.
 
 ![Bony Escape](https://user-images.githubusercontent.com/125391663/220308427-3f89e3e2-5113-48e6-9361-ff6c830f8889.png)
 
