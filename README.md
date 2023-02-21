@@ -18,7 +18,7 @@
 
 `Ы` | `Стрелка вниз` - "ныряние" (быстрое приземление)
 
-`Enter` - атака
+`Пробел` - атака
 
 `Escape` (`Esc`) - пауза
 
@@ -43,7 +43,7 @@
 
 `S` | `Arrow Down` - "diving" (fast landing)
 
-`Enter` - attack
+`Space` - attack
 
 `Escape` (`Esc`) - pause
 
