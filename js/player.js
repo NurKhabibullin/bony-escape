@@ -85,6 +85,7 @@ export class Player {
 
     draw(context) {
         if (this.game.debug) {
+            context.strokeStyle = '#fff';
             context.strokeRect(this.x, this.y, this.width, this.height);
         }
 
@@ -106,7 +107,7 @@ export class Player {
         this.game.enemies.forEach(enemy => {
             if (enemy.x < this.x + this.width && enemy.x > this.x - enemy.width 
                 && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height 
-                && this.attackInterval < this.lastAttackTimer && input.includes('Enter')) {
+                && this.attackInterval < this.lastAttackTimer && input.includes(' ')) {
                 enemy.hp -= this.attackDamage;
                 enemy.x += 30;
                 enemy.speedX--;

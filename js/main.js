@@ -5,8 +5,10 @@ import { UI } from '../js/UI.js';
 import { Bg } from '../js/bg.js';
  
 window.onload = function() {
-    let pause = false;
+    let pause = false, reload = false, gameSpeed = 0;
+
     let pauseButton = document.getElementById('pause');
+    let reloadButton = document.getElementById('reload')
 
     pauseButton.addEventListener('click', () => {
         pause = !pause;
@@ -30,8 +32,13 @@ window.onload = function() {
         }
     }, true);
 
-    document.getElementById('reload').addEventListener('click', () => {
-        location.reload();
+    reloadButton.addEventListener('click', () => {
+        if (!reload) {
+            reloadButton.innerHTML = 'Reload';
+            reload = true;
+        } else {
+            location.reload();
+        }
     });
 
     let canvas = document.getElementById('canvas');
@@ -48,7 +55,7 @@ window.onload = function() {
 
             this.pause = pause;
             this.debug = false;
-            this.speed = 1;
+            this.speed = gameSpeed;
             this.time = 0;
             this.maxTime = 90000;
             this.gameOver = false;
@@ -71,7 +78,7 @@ window.onload = function() {
         }
         
         update(deltaTime) {
-            if (pause) {
+            if (pause || !reload) {
                 this.speed = 0;
             } else {
                 this.speed = 1;
