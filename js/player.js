@@ -22,12 +22,13 @@ export class Player {
         this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), 
             new Diving(this.game)];
         this.currentState = null;
-        this.attackInterval = 200;
+
+        this.attackInterval = 350;
         this.lastAttackTimer = 0;
     }
 
     update(input, deltaTime) {
-        this.isCollision();
+        this.isCollision(input);
 
         this.lastAttackTimer += deltaTime;
 
@@ -97,11 +98,11 @@ export class Player {
         this.currentState.enter();
     }
 
-    isCollision() {
+    isCollision(input) {
         this.game.enemies.forEach(enemy => {
             if (enemy.x < this.x + this.width && enemy.x > this.x - enemy.width 
                 && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height 
-                && this.attackInterval < this.lastAttackTimer) {
+                && this.attackInterval < this.lastAttackTimer && input.includes('Enter')) {
                 enemy.hp--;
                 enemy.x += 30;
                 enemy.speedX--;

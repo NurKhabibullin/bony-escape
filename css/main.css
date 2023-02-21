@@ -27,22 +27,15 @@ html, body {
           user-select: none;
 }
 
-#button {
-  border: none;
-  background: none;
-  width: 100px;
-}
-
 #canvas {
   max-width: 100%;
   max-height: 100%;
   margin-top: 50px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(47%);
   border: 3px solid #000;
 }
 
-#player, #enemy-fly, #enemy-ground, #timer, #bones, #damage {
+img {
   display: none;
 }
 

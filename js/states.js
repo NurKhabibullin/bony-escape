@@ -29,7 +29,7 @@ export class Sitting extends State {
         if (input.includes('a') || input.includes('ф') || input.includes('ArrowLeft')
                 || input.includes('d') || input.includes('в') || input.includes('ArrowRight')) {
             this.game.player.setState(states.RUNNING);
-        } else if (input.includes('w') || input.includes('ц') || input.includes('ArrowUp') || input.includes(' ')) {
+        } else if (input.includes('w') || input.includes('ц') || input.includes('ArrowUp')) {
             this.game.player.setState(states.JUMPING);
         }
     }
@@ -49,7 +49,7 @@ export class Running extends State {
     handleInput(input) {
         if (this.game.player.speed === 0) {
             this.game.player.setState(states.SITTING);
-        } else if (input.includes('w') || input.includes('ц') || input.includes('ArrowUp') || input.includes(' ')) {
+        } else if (input.includes('w') || input.includes('ц') || input.includes('ArrowUp')) {
             this.game.player.setState(states.JUMPING);
         }
     }
@@ -73,7 +73,8 @@ export class Jumping extends State {
     handleInput(input) {
         if (this.game.player.vy > this.game.player.weight) {
             this.game.player.setState(states.FALLING);
-        } else if ((input.includes('s') || input.includes('ы') || input.includes('ArrowDown')) && !this.game.player.onGround()) {
+        } else if ((input.includes('s') || input.includes('ы') || input.includes('ArrowDown')) 
+                    && !this.game.player.onGround()) {
             this.game.player.setState(states.DIVING);
         }
     }
@@ -97,7 +98,8 @@ export class Falling extends State {
     handleInput(input) {
         if (this.game.player.onGround()) {
             this.game.player.setState(states.RUNNING);
-        } else if ((input.includes('s') || input.includes('ы') || input.includes('ArrowDown')) && !this.game.player.onGround()) {
+        } else if ((input.includes('s') || input.includes('ы') || input.includes('ArrowDown')) 
+                    && !this.game.player.onGround()) {
             this.game.player.setState(states.DIVING);
         }
     }

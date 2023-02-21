@@ -1,30 +1,43 @@
 import { InputHandler } from '../js/input.js';
 import { Player } from '../js/player.js';
 import { GroundEnemy, FlyingEnemy } from '../js/enemies.js';
-import { UI } from '../js/UI.js'
-
-
-
+import { UI } from '../js/UI.js';
+// import { Bg } from '../js/bg.js';
+ 
 window.onload = function() {
-    let pause = false, resume = false;
-    
-    document.getElementById('pause').addEventListener('click', () => {
-        pause = true;
-        resume = false;
+    let pause = false;
+    let pauseButton = document.getElementById('pause');
+
+    pauseButton.addEventListener('click', () => {
+        pause = !pause;
+        
+        if (pause) {
+            pauseButton.innerHTML = 'Resume';
+        } else {
+            pauseButton.innerHTML = 'Pause';
+        }
     });
-    
-    document.getElementById('resume').addEventListener('click', () => {
-        resume = true;
-        pause = false;
-    });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            pause = !pause;
+
+            if (pause) {
+                pauseButton.innerHTML = 'Resume';
+            } else {
+                pauseButton.innerHTML = 'Pause';
+            }
+        }
+    }, true);
 
     document.getElementById('reload').addEventListener('click', () => {
         location.reload();
     });
 
-    let gameMode = +document.getElementById('mode-choose').value;
+    let canvas = document.getElementById('canvas');
+    canvas.id = 'canvas';
 
-    const canvas = document.getElementById('canvas'), ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
     canvas.width = 800, canvas.height = 500;
 
@@ -33,7 +46,6 @@ window.onload = function() {
             this.width = width;
             this.height = height;
 
-            this.mode = gameMode;
             this.pause = pause;
             this.debug = false;
             this.speed = 1;
@@ -43,9 +55,10 @@ window.onload = function() {
             this.bones = 0;
             this.damage = 3;
             this.floatingTexts = [];
+            // this.bg = new Bg(this);
 
             this.marginX = 100;
-            this.marginY = 50;
+            this.marginY = 0;
             this.player = new Player(this);
             this.input = new InputHandler(this);
             this.UI = new UI(this);
@@ -58,11 +71,9 @@ window.onload = function() {
         }
         
         update(deltaTime) {
-            if (pause && this.mode < 2) {
+            if (pause) {
                 this.speed = 0;
-            }
-
-            if (resume) {
+            } else {
                 this.speed = 1;
             }
 
@@ -97,6 +108,8 @@ window.onload = function() {
         }
 
         draw(context) {
+            // this.bg.draw(context);
+
             this.player.draw(context);
 
             this.enemies.forEach(enemy => {
