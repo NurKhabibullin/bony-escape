@@ -10,19 +10,19 @@
 
 ### Управление:
 
-Ф | Стрелка влево - движение влево
+`Ф` | `Стрелка влево` - движение влево
 
-В | Стрелка вправо - движение вправо
+`В` | Стрелка вправо - движение вправо
 
-Ц | Стрелка вверх - прыжок
+`Ц` | `Стрелка вверх` - прыжок
 
-Ы | Стрелка вниз - "ныряние" (быстрое приземление)
+`Ы` | `Стрелка вниз` - "ныряние" (быстрое приземление)
 
-Enter - атака
+`Enter` - атака
 
-Escape (Esc) - пауза
+`Escape` (`Esc`) - пауза
 
-Й - дебаг (границы спрайтов)
+`Й` - дебаг (границы спрайтов)
 
 ## en
 ### Bony Escape is a game developed using **_JavaScript_ and _HTML Canvas_**. 
@@ -33,16 +33,20 @@ After the passage of game time, a message about a successful escape or an annoyi
 
 ### The management:
 
-A | Arrow Left - left move
+`A` | `Arrow Left` - left move
 
-D | Arrow Right - right move
+`D` | `Arrow Right` - right move
 
-W | Arrow Up - jumping
+`W` | `Arrow Up` - jumping
 
-S | Arrow Down - "diving" (fast landing)
+`S` | `Arrow Down` - "diving" (fast landing)
 
-Enter - attack
+`Enter` - attack
 
-Escape (Esc) - pause
+`Escape` (`Esc`) - pause
 
-Q - debug (hitboxes on)
+`Q` - debug (hitboxes on)
+
+![Bony Escape](https://user-images.githubusercontent.com/125391663/220308427-3f89e3e2-5113-48e6-9361-ff6c830f8889.png)
+
+
