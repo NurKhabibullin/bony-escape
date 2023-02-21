@@ -1,5 +1,5 @@
 import { Sitting, Running, Jumping, Falling, Diving } from '../js/states.js';
-// import { FloatingText } from '../js/floatingText.js';
+import { FloatingText } from '../js/floatingText.js';
 
 export class Player {
     constructor(game) {
@@ -8,6 +8,7 @@ export class Player {
         this.height = 91.3;
         this.x = this.game.marginX;;
         this.y = this.game.height - this.height - this.game.marginY;
+        
         this.img = document.getElementById('player');
         this.frameX = 0;
         this.frameY = 0;
@@ -15,10 +16,13 @@ export class Player {
         this.fps = 25;
         this.frameInterval = 40; // 1000 / fps
         this.frameTimer = 0;
+        
+        this.attackDamage = 1;
         this.speed = 0;
         this.vy = 0;
         this.weight = 1;
         this.maxSpeed = 10;
+
         this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), 
             new Diving(this.game)];
         this.currentState = null;
@@ -103,10 +107,12 @@ export class Player {
             if (enemy.x < this.x + this.width && enemy.x > this.x - enemy.width 
                 && enemy.y < this.y + this.height && enemy.y > this.y - enemy.height 
                 && this.attackInterval < this.lastAttackTimer && input.includes('Enter')) {
-                enemy.hp--;
+                enemy.hp -= this.attackDamage;
                 enemy.x += 30;
                 enemy.speedX--;
                 this.lastAttackTimer = 0;
+
+                // this.game.floatingTexts.push(new FloatingText(`-${1}`, enemy.x, enemy.y, 150, 50));
             }
         });
     }

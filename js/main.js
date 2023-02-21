@@ -2,7 +2,7 @@ import { InputHandler } from '../js/input.js';
 import { Player } from '../js/player.js';
 import { GroundEnemy, FlyingEnemy } from '../js/enemies.js';
 import { UI } from '../js/UI.js';
-// import { Bg } from '../js/bg.js';
+import { Bg } from '../js/bg.js';
  
 window.onload = function() {
     let pause = false;
@@ -55,10 +55,10 @@ window.onload = function() {
             this.bones = 0;
             this.damage = 3;
             this.floatingTexts = [];
-            // this.bg = new Bg(this);
+            this.bg = new Bg(this);
 
-            this.marginX = 100;
-            this.marginY = 0;
+            this.marginX = 0;
+            this.marginY = 50;
             this.player = new Player(this);
             this.input = new InputHandler(this);
             this.UI = new UI(this);
@@ -108,7 +108,7 @@ window.onload = function() {
         }
 
         draw(context) {
-            // this.bg.draw(context);
+            this.bg.draw(context);
 
             this.player.draw(context);
 

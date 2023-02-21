@@ -21,7 +21,7 @@ export class FloatingText {
 
     draw(context) {
         context.font = '30px Yanone Kaffeesatz';
-        context.fillStyle = 'rgba(0, 0, 0, .5)';
+        context.fillStyle = 'rgba(255, 255, 255, .5)';
         context.fillText(this.value, this.x, this.y);
     }
 }
