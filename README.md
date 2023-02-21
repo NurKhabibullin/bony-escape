@@ -14,9 +14,13 @@
 
 В | Стрелка вправо - движение вправо
 
-Ц | Стрелка вверх | Пробел - прыжок
+Ц | Стрелка вверх - прыжок
 
 Ы | Стрелка вниз - "ныряние" (быстрое приземление)
+
+Enter - атака
+
+Escape (Esc) - пауза
 
 Й - дебаг (границы спрайтов)
 
@@ -33,8 +37,12 @@ A | Arrow Left - left move
 
 D | Arrow Right - right move
 
-W | Arrow Up | Space - jumping
+W | Arrow Up - jumping
 
 S | Arrow Down - "diving" (fast landing)
+
+Enter - attack
+
+Escape (Esc) - pause
 
 Q - debug (hitboxes on)
